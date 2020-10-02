@@ -1,0 +1,11 @@
+BUCKET: 'bucket'
+MANIFEST_BUCKET: 'manifest-bucket'
+S3_KEY: 'hoge/fuga'
+START_DATE: '2020-01-01'
+END_DATE: '2020-01-02'
+AWS_ACCOUNT_ID: "XXXXXXXX"
+ROLE_ARN: "arn:aws:iam::XXXXXXX:role/batch_role"
+TAGS:
+  - :key: "key"
+    :value: "value"
+GLACIER_JOB_TIER: "STANDARD"
