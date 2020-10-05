@@ -6,7 +6,7 @@ require 'date'
 require 'yaml'
 
 def main
-  manifest_file_name = "manifest#{DateTime.now.strftime('%Y%m%d') + SecureRandom.uuid}.csv"
+  manifest_file_name = "manifest#{DateTime.now.strftime('%Y%m%d%H%M%S')}.csv"
   make_manifest(manifest_file_name)
   response = upload_manifest_file(manifest_file_name)
   create_batch_operation_job(manifest_file_name, response.etag)
@@ -22,10 +22,17 @@ def make_manifest(file_name)
 end
 
 def s3_list_object_content(bucket, key)
-  s3_client.list_objects(
-    bucket: bucket,
-    prefix: key
-  ).contents
+  params = { bucket: bucket, prefix: key }
+  contents = []
+  loop do
+    objects = s3_client.list_objects_v2(params)
+    contents.push(objects.contents)
+    next_continuation_token = objects.next_continuation_token
+    break unless next_continuation_token
+
+    params[:continuation_token] = next_continuation_token
+  end
+  contents.flatten(1)
 end
 
 def upload_manifest_file(file_name)
