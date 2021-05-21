@@ -14,7 +14,7 @@ end
 
 def make_manifest(file_name)
   target_date_range.each do |date|
-    s3_objects = s3_list_object_content(config['BUCKET'], "#{config['S3_KEY']}/#{date.strftime('%Y%m%d')}")
+    s3_objects = s3_list_object_content(config['BUCKET'], "#{config['S3_KEY']}/#{date.strftime(config['LOG_DATE_FORMAT'])}")
     s3_objects.each do |object|
       CSV.open(file_name, 'a') { |f| f << [config['BUCKET'], object.key] }
     end
