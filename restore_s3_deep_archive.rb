@@ -13,7 +13,7 @@ def main
 end
 
 def make_manifest(file_name)
-  target_date_range.each do |date|
+  target_dates.each do |date|
     s3_objects = s3_list_object_content(config['BUCKET'], "#{config['S3_KEY']}/#{date.strftime(config['LOG_DATE_FORMAT'])}")
     s3_objects.each do |object|
       CSV.open(file_name, 'a') { |f| f << [config['BUCKET'], object.key] }
@@ -81,8 +81,8 @@ def create_batch_operation_job(manifes_file_name, etag) # rubocop:disable Metric
   puts job_id
 end
 
-def target_date_range
-  Date.parse(config['START_DATE'])..Date.parse(config['END_DATE'])
+def target_dates
+  config['TERMS'].flat_map { |term| [*Date.parse(term['START_DATE'])..Date.parse(term['END_DATE'])] }
 end
 
 def s3_client
