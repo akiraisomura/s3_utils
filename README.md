@@ -25,6 +25,7 @@ It requires the structure that has element below
   - ROLE_ARN: set role arn
   - TAGS: set tags
   - GLACIER_JOB_TIER: choose "STANDARD" or "BULK"
+  - LOG_DATE_FORMAT: set s3 dir date format
 
 
 4. bundle exec ruby restore_s3_deep_archive.rb
