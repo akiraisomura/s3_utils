@@ -1,6 +1,11 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (7.0.4.3)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
     ast (2.4.1)
     aws-eventstream (1.1.0)
     aws-partitions (1.379.0)
@@ -948,7 +953,11 @@ GEM
     aws-sigv2 (1.0.1)
     aws-sigv4 (1.2.2)
       aws-eventstream (~> 1, >= 1.0.2)
+    concurrent-ruby (1.2.2)
+    i18n (1.12.0)
+      concurrent-ruby (~> 1.0)
     jmespath (1.4.0)
+    minitest (5.18.0)
     parallel (1.19.2)
     parser (2.7.1.5)
       ast (~> 2.4.1)
@@ -967,12 +976,15 @@ GEM
     rubocop-ast (0.7.1)
       parser (>= 2.7.1.5)
     ruby-progressbar (1.10.1)
+    tzinfo (2.0.6)
+      concurrent-ruby (~> 1.0)
     unicode-display_width (1.7.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport
   aws-sdk (~> 3)
   rubocop
 
